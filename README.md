@@ -9,7 +9,6 @@ A Tampermonkey userscript that copies GPT web responses as clean Markdown while 
 - Use the native response Copy button.
 - Preserve inline and display LaTeX.
 - Convert common headings, lists, links, tables, images, and code blocks.
-- Leave text inputs and code-copy buttons unchanged.
 
 ## Install
 
