@@ -1,6 +1,6 @@
 # ChatGPT Markdown & LaTeX Copier
 
-A Tampermonkey userscript that copies GPT web responses as clean Markdown while preserving inline `$...$` and display `$$...$$` LaTeX.
+A Tampermonkey userscript for copying ChatGPT web responses containing LaTeX formulas as clean Markdown.
 
 
 ## Features
