@@ -18,7 +18,6 @@ A Tampermonkey userscript that copies GPT web responses as clean Markdown while 
 3. Confirm the userscript installation and allow clipboard access.
 4. Reload the GPT web page.
 
-Disable other copy-to-Markdown userscripts before testing to avoid duplicate clipboard handlers.
 
 ## Usage
 
