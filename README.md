@@ -5,10 +5,10 @@ A Tampermonkey userscript for copying ChatGPT web responses with equations as we
 
 ## Features
 
-You can use it with:
-- Select text and press `Ctrl+C`.
-- Use the native response Copy button.
-and then, you will get well-formatted Markdown/LaTeX.
+Copy ChatGPT responses in either of the following ways:
+- Select the response text and press `Ctrl+C`.
+- Click ChatGPT’s native **Copy** button.
+The copied content will be converted to well-formatted Markdown/LaTeX.
 
 ## Install
 
