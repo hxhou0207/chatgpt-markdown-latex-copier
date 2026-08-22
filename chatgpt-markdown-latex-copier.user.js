@@ -1,10 +1,14 @@
 // ==UserScript==
 // @name         ChatGPT Markdown & LaTeX Copier
-// @namespace    https://github.com/chatgpt-markdown-latex-copier
+// @namespace    https://github.com/hxhou0207/chatgpt-markdown-latex-copier
 // @version      1.0.0
 // @description  Tampermonkey userscript for copying GPT web responses as Markdown with inline and display LaTeX.
 // @author       Open-source contributors
 // @license      MIT
+// @homepageURL  https://github.com/hxhou0207/chatgpt-markdown-latex-copier
+// @sourceURL    https://raw.githubusercontent.com/hxhou0207/chatgpt-markdown-latex-copier/main/chatgpt-markdown-latex-copier.user.js
+// @downloadURL  https://raw.githubusercontent.com/hxhou0207/chatgpt-markdown-latex-copier/main/chatgpt-markdown-latex-copier.user.js
+// @updateURL    https://raw.githubusercontent.com/hxhou0207/chatgpt-markdown-latex-copier/main/chatgpt-markdown-latex-copier.user.js
 // @match        *://*.chatgpt.com/*
 // @match        *://chatgpt.com/*
 // @match        *://chat.openai.com/*
