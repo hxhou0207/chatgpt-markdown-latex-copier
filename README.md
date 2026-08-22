@@ -1,36 +1,22 @@
 # ChatGPT Markdown & LaTeX Copier
 
-A Tampermonkey userscript for copying ChatGPT web responses containing LaTeX formulas as clean Markdown.
+A Tampermonkey userscript for copying ChatGPT web responses with equations as well-formatted Markdown and LaTeX.
 
 
 ## Features
 
-- Select text and press `Ctrl+C` or `Cmd+C`.
+You can use it with:
+- Select text and press `Ctrl+C`.
 - Use the native response Copy button.
-- Preserve inline and display LaTeX.
-- Convert common headings, lists, links, tables, images, and code blocks.
+and then, you will get well-formatted Markdown/LaTeX.
 
 ## Install
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/).
-2. Open [`chatgpt-markdown-latex-copier.user.js`](./chatgpt-markdown-latex-copier.user.js) on GitHub and click **Raw**.
-3. Confirm the userscript installation and allow clipboard access.
-4. Reload the GPT web page.
-
-
-## Usage
-
-Select a response and copy it normally, or click the response's native Copy button. For example:
-
-```markdown
-Inline: $x_t$
-
-$$
-E = mc^2
-$$
-```
-
-Set `settings.compactMode` to `false` in the script if you want standard paragraph spacing.
+2. Open [`chatgpt-markdown-latex-copier.user.js`](https://chatgpt.com/c/chatgpt-markdown-latex-copier.user.js) on GitHub and click **Raw**.
+3. Tampermonkey should automatically open the userscript installation page. Click **Install**.
+4. If it does not, create a new userscript in Tampermonkey, paste the script contents into the editor, and save it.
+5. Reload the ChatGPT web page.
 
 ## Scope
 
