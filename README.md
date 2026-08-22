@@ -2,7 +2,6 @@
 
 A Tampermonkey userscript that copies GPT web responses as clean Markdown while preserving inline `$...$` and display `$$...$$` LaTeX.
 
-Keywords: GPT, ChatGPT, Markdown, LaTeX, Tampermonkey, userscript.
 
 ## Features
 
