@@ -47,3 +47,7 @@ This project is derived in part from [AI Markdown & LaTeX Copier](https://github
 ## License
 
 MIT. See [`LICENSE`](./LICENSE).
+
+## Friendly Links
+
+- [Linux.do](https://linux.do)
