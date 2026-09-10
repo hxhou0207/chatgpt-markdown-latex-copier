@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ChatGPT Markdown & LaTeX Copier
 // @namespace    https://github.com/hxhou0207/chatgpt-markdown-latex-copier
-// @version      1.0.0
+// @version      1.0.1
 // @description  Copy ChatGPT web responses containing LaTeX formulas as clean Markdown.
 // @author       Open-source contributors
 // @license      MIT
@@ -292,6 +292,23 @@
     .trim();
 
   // --- 3. Markdown Engine ---
+  const getHeadingLevel = (el) => {
+    const tagName = el.tagName?.toUpperCase?.() || '';
+    const match = /^H([1-6])$/.exec(tagName);
+    if (match) return Number(match[1]);
+
+    // Some React renderers use a non-heading tag with ARIA semantics, e.g.
+    // `<div role="heading" aria-level="2">`.
+    if ((el.getAttribute?.('role') || '').toLowerCase() === 'heading') {
+      const raw = el.getAttribute('aria-level') || '';
+      const level = Number.parseInt(raw, 10);
+      if (Number.isInteger(level) && level >= 1 && level <= 6) return level;
+      return 2;
+    }
+
+    return 0;
+  };
+
   const serializeNode = (node) => {
     if (node.nodeType === 3) return node.textContent;
     if (node.nodeType !== 1) return '';
@@ -313,6 +330,16 @@
       return `\n\n\`\`\`${lang}\n${(code||e).textContent.replace(/\n$/,'')}\n\`\`\`\n\n`;
     }
     if (tag === 'code') return e.closest('pre') ? '' : `\`${e.textContent}\``;
+
+    const headingLevel = getHeadingLevel(e);
+    if (headingLevel) {
+      const heading = normalizeTextContent(Array.from(e.childNodes).map(serializeNode).join(''))
+        .replace(/\s*\n+\s*/g, ' ');
+      if (heading) {
+        return `\n\n${'#'.repeat(headingLevel)} ${heading}\n\n`;
+      }
+    }
+
     if (tag === 'a') return e.href.startsWith('javascript:') ? e.textContent : `[${Array.from(e.childNodes).map(serializeNode).join('')}](${e.href})`;
     if (tag === 'img') return `![${e.alt||''}](${e.src||''})`;
     if (tag === 'strong' || tag === 'b') return `**${Array.from(e.childNodes).map(serializeNode).join('')}**`;
@@ -375,12 +402,20 @@
       return token;
     });
 
+    // Protect headings before compactMode collapses blank lines.
+    const headingTokens = [];
+    res = res.replace(/^#{1,6} .*$/gm, heading => {
+      const token = `\uE200${headingTokens.length}\uE201`;
+      headingTokens.push(heading);
+      return token;
+    });
+
     if (settings.compactMode) {
       // Collapse repeated line breaks in compact mode.
       res = res.replace(/\n{2,}/g, '\n');
 
       // Restore the blank lines required around Markdown block elements.
-      const blockToken = '(?:\\uE000\\d+\\uE001|\\uE100\\d+\\uE101)';
+      const blockToken = '(?:\\uE000\\d+\\uE001|\\uE100\\d+\\uE101|\\uE200\\d+\\uE201)';
       res = res.replace(new RegExp(`([^\\n])\\n(${blockToken})`, 'g'), '$1\n\n$2')
                .replace(new RegExp(`(${blockToken})\\n([^\\n])`, 'g'), '$1\n\n$2')
                .replace(/([^\n])\n(```)/g, '$1\n\n$2')
@@ -391,6 +426,7 @@
     }
 
     return res
+      .replace(/\uE200(\d+)\uE201/g, (_, index) => headingTokens[Number(index)] || '')
       .replace(/\uE000(\d+)\uE001/g, (_, index) => blockMath[Number(index)] || '')
       .replace(/\uE100(\d+)\uE101/g, (_, index) => fencedCode[Number(index)] || '')
       .trim();
